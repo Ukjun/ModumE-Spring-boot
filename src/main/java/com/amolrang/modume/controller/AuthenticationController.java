@@ -12,15 +12,14 @@ public class AuthenticationController{
 	public String loginViewFrame(Model model) {
 		System.out.println("로그인 페이지 get 접근");
 		model.addAttribute("title", "로그인페이지");
-		return "/index";
+		return "/login";
 	}
 	
 	@RequestMapping(value = "/loginAction", method = RequestMethod.POST)
 	public String loginAction(Model model) {
 		System.out.println("로그인 페이지 post 접근");
 		model.addAttribute("title", "로그인 중 ...");
-		
-		return "redirect:/index";
+		return "redirect:/login";
 	}
 	
 }
