@@ -6,17 +6,17 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
-    <link rel="stylesheet" href="/resources/css/index.css">
+    <link rel="stylesheet" href="/css/index.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <div id="bg1">
-        <img src="/resources/img/yousef-salhamoud-kQ6mh2yagDw-unsplash.jpg" alt="" id="bg1_1">
+        <img src="/img/yousef-salhamoud-kQ6mh2yagDw-unsplash.jpg" alt="" id="bg1_1">
     </div>
     <main class="centralContainer">
         <header class="centralHeader">
             <div class="centralLogo">
-                <img id="centralLogoImage" src="/resources/img/logowhite.png" alt="">
+                <img id="centralLogoImage" src="/img/logowhite.png" alt="">
             </div>
             <div class="centralSearch">
                 <form action="" method="POST" class="centralSearchFrm">
@@ -60,6 +60,6 @@
             </aside>
         </section>
     </main>
-    <script src="/resources/js/index.js"></script>
+    <script src="/js/index.js"></script>
 </body>
 </html>

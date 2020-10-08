@@ -3,7 +3,6 @@ package com.amolrang.modume.service;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.amolrang.modume.domain.CustomUser;
-import com.amolrang.modume.domain.CustomUserMapper;
 import com.amolrang.modume.repository.MemberDTO;
 
 @Service
@@ -24,9 +21,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 *
 	 * 여기서는 DB에 저장되어 있는 유저정보를 조회하여 UserDetails 을 구성한다.
 	 */
-
-	@Autowired
-	CustomUserMapper memberMapper;
 
 	// 시큐리티의 내용 외 파라미터를 추가하고 싶을 때, 아래 사용
 	// 제약조건: Controller 에서 Auth를 점검할 때, UserCustom 으로 받아야 함.
@@ -40,21 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String user_email) throws UsernameNotFoundException {
-		// 로그인 시도하려는 유저정보 조회
-		MemberDTO memberDTO = memberMapper.chkLogin(user_email);
-		System.out.println(memberDTO.toString());
-		
-		// 조회가 되지않는 고객은 에러발생.
-		if (memberDTO == null) {
-			throw new UsernameNotFoundException(user_email);
-		}
-
-		CustomUser userCustom = new CustomUser(memberDTO.getUser_email(), memberDTO.getUser_password(), enabled,
-				accountNonExpired, credentialsNonExpired, accountNonLocked, authorities(memberDTO),
-				memberDTO.getUser_email(), memberDTO.getUser_name() // 이름
-		);
-
-		return userCustom;
+		return null;
 	}
 
 	// DB에 등록된 권한에 따라 유저권한 부여 user_role
