@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:useBean id="StringUtils" class="com.amolrang.modume.utils.StringUtils"/>
+
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${title}</title>
 </head>
 <body>
 <form name="f" action="/loginAction" method="POST">

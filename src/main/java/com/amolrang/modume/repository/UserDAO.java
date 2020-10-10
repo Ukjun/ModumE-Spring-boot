@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.amolrang.modume.mapper.UserMapper;
 import com.amolrang.modume.model.UserModel;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class UserDAO {
 	@Autowired
@@ -18,13 +21,6 @@ public class UserDAO {
 	}
 
 	public UserModel save(UserModel userModel, String role) {
-		System.out.println(role);
-		System.out.println(userModel.getId());
-		System.out.println(userModel.getPassword());
-		System.out.println(userModel.isAccountNonExpired());
-		System.out.println(userModel.isAccountNonLocked());
-		System.out.println(userModel.isCredentialsNonExpired());
-		System.out.println(userModel.isEnabled());
 		userMapper.insertUser(userModel);
 		userMapper.insertUserAutority(userModel.getId(), role);
 		return userModel;

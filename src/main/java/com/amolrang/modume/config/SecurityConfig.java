@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.amolrang.modume.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,28 +24,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+	    web.ignoring().antMatchers("/favicon.ico");
+	    web.ignoring().antMatchers("/css/**");
+	    web.ignoring().antMatchers("/js/**");
+	    web.ignoring().antMatchers("/img/**");
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		System.out.println("권한접근승인여부");
+		log.info("권한접근승인여부");
 		auth.userDetailsService(userService).passwordEncoder(encoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		String[] guest = { "/", "/main", "/login", "/join","/create" };
-		String loginPage = "/login";
-		String loginProcessingUrl = "/loginAction";
-		String mainPage = "/";
-
-		http.authorizeRequests().antMatchers(guest).permitAll() // 게스트 접근 페이지
-				.and().formLogin().loginPage(loginPage).loginProcessingUrl(loginProcessingUrl)
-				.defaultSuccessUrl(mainPage).permitAll() // 로그인페이지
-				.and().logout().logoutSuccessUrl(mainPage).invalidateHttpSession(true).permitAll() // 로그아웃 후 돌아가는 페이지
-				.and().authorizeRequests().antMatchers("/admin").hasRole("ADMIN") // 권한 접근 페이지
-				.and().exceptionHandling().accessDeniedPage(mainPage)// 기타 애러시 메인페이지로 보내버림
-				.and().csrf().disable();
+		http.csrf().disable();
+		
+		http.formLogin().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/loginAction").permitAll();
+		http.logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/");
+		
+		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/main").permitAll();
+		http.authorizeRequests().antMatchers("/").permitAll();
+		http.authorizeRequests().anyRequest().denyAll();
 	}
 	
 	@Bean

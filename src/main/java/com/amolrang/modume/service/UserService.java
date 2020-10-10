@@ -82,7 +82,14 @@ public class UserService implements UserDetailsService {
 	}
 
 	public UserModel save(UserModel userModel, String role) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stublog.info(role);
+		log.info("id:"+userModel.getId());
+		log.info("password:"+userModel.getPassword());
+		log.info(String.format("%s",userModel.isAccountNonExpired()));
+		log.info(String.format("%s",userModel.isAccountNonLocked()));
+		log.info(String.format("%s",userModel.isCredentialsNonExpired()));
+		log.info(String.format("%s",userModel.isEnabled()));
+		
 		userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
 		userModel.setAccountNonExpired(true);
 		userModel.setAccountNonLocked(true);
@@ -92,7 +99,7 @@ public class UserService implements UserDetailsService {
 	}
 
 	public Collection<GrantedAuthority> getAuthorities(String username) {
-		System.out.println(username);
+		//System.out.println(username);
 		List<String> string_authorities = userDAO.findAuthoritiesByID(username);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for (String authority : string_authorities) {
