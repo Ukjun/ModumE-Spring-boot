@@ -41,12 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		
 		http.formLogin().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/loginAction").permitAll();
-		http.logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/");
+		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/");
+		http.authorizeRequests().antMatchers("/join").permitAll();
 		
 		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().anyRequest().denyAll();
 	}
 	
 	@Bean
