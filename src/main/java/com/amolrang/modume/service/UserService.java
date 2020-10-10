@@ -83,6 +83,12 @@ public class UserService implements UserDetailsService {
 
 	public UserModel save(UserModel userModel, String role) {
 		// TODO Auto-generated method stublog.info(role);
+		userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+		userModel.setAccountNonExpired(true);
+		userModel.setAccountNonLocked(true);
+		userModel.setCredentialsNonExpired(true);
+		userModel.setEnabled(true);
+		
 		log.info("id:"+userModel.getId());
 		log.info("password:"+userModel.getPassword());
 		log.info(String.format("%s",userModel.isAccountNonExpired()));
@@ -90,11 +96,6 @@ public class UserService implements UserDetailsService {
 		log.info(String.format("%s",userModel.isCredentialsNonExpired()));
 		log.info(String.format("%s",userModel.isEnabled()));
 		
-		userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-		userModel.setAccountNonExpired(true);
-		userModel.setAccountNonLocked(true);
-		userModel.setCredentialsNonExpired(true);
-		userModel.setEnabled(true);
 		return userDAO.save(userModel, role);
 	}
 
