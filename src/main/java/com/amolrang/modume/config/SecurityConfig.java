@@ -39,13 +39,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		
-		http.formLogin().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/loginAction").permitAll();
+		//로그아웃추가
 		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/");
-		http.authorizeRequests().antMatchers("/join").permitAll();
-		
+		//권한 필요한 경로 추가
 		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN");
+		
+		//권한 필요없는 경로 추가
+		http.formLogin().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/loginAction").permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();
+		http.authorizeRequests().antMatchers("/join").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();
 	}
 	
