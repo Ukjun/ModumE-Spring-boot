@@ -34,7 +34,7 @@
                     <span class="material-icons">notifications_none</span>
                 </div>
                 <div class="menus centralMenu1_2">
-                    <span class="material-icons">person_outline</span>
+                    <span class="material-icons"><a href="/menu">person_outline</a></span>
                 </div>
             </div>
         </header>

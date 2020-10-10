@@ -50,11 +50,4 @@ public class TestController {
 		result = "권한접근";
 		return String.format("%s", result);
 	}
-	
-	@RequestMapping(value = "/test2", produces = "text/plain;charset=UTF-8")
-	public String test2() {
-		String result ="";
-		result = "권한접근테스트";
-		return String.format("%s", result);
-	}
 }
