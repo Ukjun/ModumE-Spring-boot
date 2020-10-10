@@ -19,6 +19,7 @@ public class UserModel implements UserDetails {
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
+	private String userName;
 	private Collection<? extends GrantedAuthority> authorities;
 
 	@Override
@@ -76,7 +77,7 @@ public class UserModel implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.id;
+		return this.userName;
 	}
 
 	@Override

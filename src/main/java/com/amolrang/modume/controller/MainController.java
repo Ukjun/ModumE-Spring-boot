@@ -20,7 +20,7 @@ public class MainController {
 		model.addAttribute(StringUtils.TitleKey(),"ModumE");
 		log.info("메인화면GET접근");
 		if(principal != null) {
-			log.info(principal.getName());
+			log.info("유저정보 : {}",principal);
 		}
 		return "/index";
 	}

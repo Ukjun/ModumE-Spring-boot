@@ -88,13 +88,9 @@ public class UserService implements UserDetailsService {
 		userModel.setAccountNonLocked(true);
 		userModel.setCredentialsNonExpired(true);
 		userModel.setEnabled(true);
+		userModel.setUserName(userModel.getUsername());
 		
-		log.info("id:"+userModel.getId());
-		log.info("password:"+userModel.getPassword());
-		log.info(String.format("%s",userModel.isAccountNonExpired()));
-		log.info(String.format("%s",userModel.isAccountNonLocked()));
-		log.info(String.format("%s",userModel.isCredentialsNonExpired()));
-		log.info(String.format("%s",userModel.isEnabled()));
+		log.info("userModel {}",userModel);
 		
 		return userDAO.save(userModel, role);
 	}
