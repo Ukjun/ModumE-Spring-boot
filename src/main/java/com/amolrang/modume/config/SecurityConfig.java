@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		log.info("권한접근승인여부");
+		//log.info("권한접근승인여부");
 		auth.userDetailsService(userService).passwordEncoder(encoder());
 	}
 

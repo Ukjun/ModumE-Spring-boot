@@ -1,14 +1,6 @@
 package com.amolrang.modume.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,9 +11,7 @@ import de.comhix.twitch.api.oauth.OAuthResponse;
 import de.comhix.twitch.api.oauth.TwitchAuthenticator;
 import de.comhix.twitch.api.oauth.TwitchAuthenticator.SecondStep;
 import io.reactivex.Observable;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 public class TestController {
 	String token_type;
