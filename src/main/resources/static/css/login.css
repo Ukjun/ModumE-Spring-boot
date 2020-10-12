@@ -1,17 +1,25 @@
 @charset "UTF-8";
 
-body, fieldset, legend, form, input, a {
-  margin: 0; padding: 0;
-
+html, body {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
 }
 
 #container {
   display:flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
-  padding: 100px;
+  margin: 0 auto;
+  padding-top: 100px;
+}
+
+#container>.sbm-join {
+  position: relative;
+  top: 180px;
+  right: 195px;
+
 
 }
 
@@ -20,7 +28,7 @@ body, fieldset, legend, form, input, a {
     z-index: 1;
     padding: 20px;
 }
-.fld-login, .fld-join {
+.fld-login{
   border: 0;
 }
 
@@ -30,15 +38,8 @@ body, fieldset, legend, form, input, a {
   color: #5d7599;
   font-size: 2rem;
 }
-.fld-join>.legend {
-  margin-left: 60px;
-  margin-bottom: 40px;
-  color: #5d7599;
-  font-size: 2rem;
-}
 
-
-.input-containe label,input {
+.input-container label,input {
   padding: 10px;
   margin-bottom: 20px;
 }
@@ -53,13 +54,13 @@ body, fieldset, legend, form, input, a {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.move#user_id {
+.move#id {
   top: 22px;
-  left: auto;
+  left: 0;
 }
-.move#user_pw {
+.move#password {
   top: 52px;
-  left: auto;
+  left: 0;
   z-index: 1;
 }
 .no-border {
@@ -85,7 +86,7 @@ body, fieldset, legend, form, input, a {
 #frm>.sbm-login {
   border: 0;
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 30px;
   padding: 20px 110px;
   background-color: #5d7599;
   border-radius: 50px;
@@ -99,18 +100,10 @@ body, fieldset, legend, form, input, a {
   right: 220px;
 }
 
-#container>.sbm-join {
-  position: relative;
-  top: 180px;
-  right: 195px;
-
-
-}
-
 .sbm-join > a {
   text-decoration: none;
   color: #5d7599;
-  margin-left: 20px;
+  margin-left: 5px;
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }

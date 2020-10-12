@@ -29,39 +29,5 @@
       </div>
     </div>
   </body>
-  <script>
 
-  window.onload = function(){
-
-    inputEvent();
-    if(('form').find(':input')[0]!==undefined){
-      (':focus').blur();
-      ('form').find(':input')[0].focus();
-    }
-  };
-
-  var inputEvent = function() {
-    var inputs = ('form').find(':input');
-    inputs.each(function() {
-      var input = (this),
-          label = input.parent('div.input-container');
-      if (input.val())
-        label.addClass('active');
-
-      input.focusin(function() {
-        label.addClass('focus');
-        label.siblings('div.flexbdy').addClass('off');
-      });
-      input.change(function() {
-        label.addClass('active');
-      });
-      input.focusout(function() {
-        label.removeClass('focus');
-
-        if (!input.val()) label.removeClass('active').siblings('div.flexbdy').removeClass('off');
-      });
-    }
-    );
-  }
-  </script>
   </html>
