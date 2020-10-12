@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${title}</title>
+<link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
     <div id="container">
@@ -24,7 +25,7 @@
       <input name="${_csrf.parameterName}" type="hidden" value="${_crsf.token}">
       </form>
       <div class="sbm-join">
-        <a href="join.html">sign up</a>
+        <a href="">sign up</a>
       </div>
     </div>
   </body>
