@@ -26,7 +26,7 @@ public class AuthenticationController{
 		return StringUtils.LoginURLValue();
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginAction", method = RequestMethod.POST)
 	public String loginAction(Model model) {
 		log.info("로그인 페이지 post 접근");
 		return "redirect:" + StringUtils.LoginURLValue();

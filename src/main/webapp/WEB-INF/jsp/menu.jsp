@@ -12,6 +12,7 @@
 <body>
 	<sec:authorize access="isAnonymous()">
 		<a href="/login">로그인</a>
+		<a href="/join">회원가입</a>
 	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
 		<p>
