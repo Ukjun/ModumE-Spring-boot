@@ -25,7 +25,7 @@
       <input name="${_csrf.parameterName}" type="hidden" value="${_crsf.token}">
       </form>
       <div class="sbm-join">
-        <a href="">sign up</a>
+        <a href="/join">sign up</a>
       </div>
     </div>
   </body>

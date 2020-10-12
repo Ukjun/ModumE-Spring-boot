@@ -32,11 +32,12 @@ public class UserService implements UserDetailsService {
 	PasswordEncoder passwordEncoder;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		UserModel userModel = userDAO.findById(username);
+		log.info(id);
+		UserModel userModel = userDAO.findById(id);
 		if(userModel == null) {return userModel;};
-		userModel.setAuthorities(getAuthorities(username));
+		userModel.setAuthorities(getAuthorities(id));
 		UserDetails userDetails = new UserDetails() {
 
 			@Override
@@ -99,9 +100,9 @@ public class UserService implements UserDetailsService {
 		return userDAO.save(userModel, role);
 	}
 
-	public Collection<GrantedAuthority> getAuthorities(String username) {
+	public Collection<GrantedAuthority> getAuthorities(String id) {
 		//System.out.println(username);
-		List<String> string_authorities = userDAO.findAuthoritiesByID(username);
+		List<String> string_authorities = userDAO.findAuthoritiesByID(id);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for (String authority : string_authorities) {
 			authorities.add(new SimpleGrantedAuthority(authority));

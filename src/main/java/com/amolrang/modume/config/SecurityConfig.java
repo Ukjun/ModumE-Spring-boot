@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN");
 		
 		//권한 필요없는 경로 추가
-		http.formLogin().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/loginAction").permitAll();
+		http.formLogin().loginPage("/login").usernameParameter("id").defaultSuccessUrl("/").loginProcessingUrl("/loginAction").permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();

@@ -16,8 +16,8 @@ public class UserDAO {
 	@Autowired
 	UserMapper userMapper;
 
-	public UserModel findById(String username) {
-		return userMapper.readUser(username);
+	public UserModel findById(String id) {
+		return userMapper.readUser(id);
 	}
 
 	public UserModel save(UserModel userModel, String role) {
