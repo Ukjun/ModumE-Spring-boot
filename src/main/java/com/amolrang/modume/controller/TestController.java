@@ -50,4 +50,10 @@ public class TestController {
 		result = "권한접근";
 		return String.format("%s", result);
 	}
+	
+	@RequestMapping(value = "/twitch/")
+	public String twitchChannel() {
+		
+		return "/twitch";
+	}
 }
