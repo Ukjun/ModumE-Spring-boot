@@ -16,4 +16,7 @@ public class StringUtils {
 	//회원가입 화면 키,값
 	public final static String JoinURLKey() {return "join";}
 	public final static String JoinURLValue() {return "/join";}
+
+	//거부 당한 경로,
+	public final static String Denied() {return "/denied";}
 }

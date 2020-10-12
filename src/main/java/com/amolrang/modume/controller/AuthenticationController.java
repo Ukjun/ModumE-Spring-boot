@@ -26,7 +26,7 @@ public class AuthenticationController{
 		return StringUtils.LoginURLValue();
 	}
 	
-	@RequestMapping(value = "/loginAction", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginAction(Model model) {
 		log.info("로그인 페이지 post 접근");
 		return "redirect:" + StringUtils.LoginURLValue();
@@ -45,6 +45,12 @@ public class AuthenticationController{
 		log.info("회원가입 post 접근");
 		userService.save(userModel, "ROLE_MEMBER");
 		return "redirect:"+StringUtils.LoginURLValue();
+	}
+	
+	@RequestMapping(value = "/denied")
+	public String denied(Model model) {
+		model.addAttribute(StringUtils.TitleKey(), "거부 당함");
+		return StringUtils.Denied();
 	}
 	
 }
