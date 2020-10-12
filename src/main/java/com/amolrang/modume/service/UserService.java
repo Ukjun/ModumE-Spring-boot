@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
 		UserModel userModel = userDAO.findById(id);
 		if(userModel == null) {return userModel;};
 		userModel.setAuthorities(getAuthorities(id));
-		UserDetails userDetails = new UserDetails() {
+		UserDetails userDetails = new  UserDetails() {
 
 			@Override
 			public boolean isEnabled() {
