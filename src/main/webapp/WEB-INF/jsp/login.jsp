@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${title}</title>
-<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
     <div id="container">
@@ -15,10 +15,10 @@
       <fieldset class="fld-login">
         <legend class="legend">login</legend>
           <div class="input-container focus">
-              <label class="move active" for="user_id"></label><input type="text" class="no-border active " id="user_id" name="user_id" placeholder="ID"   options="{ updateOn: 'keyup blur' }" required >
+              <label class="move active" for="id"></label><input type="text" class="no-border active " id="id" name="id" placeholder="ID"   options="{ updateOn: 'keyup blur' }" required >
           </div>
           <div class="input-container focus">
-            <label class="move active" for="user_pw"></label><input type="password" class="no-border active" id="user_pw" name="user_pw" placeholder="PASSWORD" autocomplete="off"  options="{ updateOn: 'keyup blur' }"  required>
+            <label class="move active" for="password"></label><input type="password" class="no-border active" id="password" name="password" placeholder="PASSWORD" autocomplete="off"  options="{ updateOn: 'keyup blur' }"  required>
           </div>
       </fieldset>
       <input class="sbm-login" type="submit" value="sign in">
