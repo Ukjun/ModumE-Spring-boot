@@ -51,6 +51,5 @@ public class AuthenticationController{
 	public String denied(Model model) {
 		model.addAttribute(StringUtils.TitleKey(), "거부 당함");
 		return StringUtils.Denied();
-	}
-	
+	}	
 }
