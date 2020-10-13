@@ -1,53 +1,50 @@
 package com.amolrang.modume.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amolrang.modume.config.DatabaseCoinfiguration;
-import com.amolrang.modume.mapper.UserMapper;
-import com.amolrang.modume.model.UserModel;
-import com.amolrang.modume.service.TestService;
-import com.amolrang.modume.service.UserService;
+import lombok.Data;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @RestController
 public class TestController {
-	
-	@Autowired
-	private TestService service;
-	
-	@RequestMapping( value = "/test", produces="text/plain;charset=UTF-8")
-	public String test() {
-		String result = "test";
-		log.info(result);
-		return String.format("%s", result);
+	@RequestMapping(value = "/api/oauth2/code/twitch")
+	public void twitchAPI() {
+		System.out.println("twitch api oauth2 접근");
 	}
 	
-	@Autowired
-	UserService userService;
+	public void ouauth2code() {
+		
+	}
+}
 
-	@Autowired
-	UserMapper userMapper;
+@Data
+class TwitchAPI{
+	private String code;
+	private static final String AUTHORIZATION_URL
+    = "https://api.twitch.tv/kraken/oauth2/authorize" +
+    "?response_type=code" +
+    "&client_id=%s" +
+    "&redirect_uri=%s" +
+    "&scope=%s" +
+    "&state=%s";
+
+private static final String ACCESSTOKEN_URL
+    = "https://api.twitch.tv/kraken/oauth2/token" +
+    "&client_id=%s" +
+    "&client_secret=%s" +
+    "&grant_type=authorization_code" +
+    "&redirect_uri=%s" +
+    "&code=%s" +
+    "&state=%s";
+
+	protected TwitchAPI(){}
 	
+	private static class InstanceHolder{
+		private static final TwitchAPI INSTANCE = new TwitchAPI();
+	}
 	
-	//ADMIN 계정 부여
-	@GetMapping("/create")
-	public UserModel create(){
-		UserModel userModel = new UserModel();
-		userModel.setId("admin");
-		userModel.setPassword("1234");
-		userService.save(userModel, "ROLE_ADMIN");
-		return userModel;
+	public static TwitchAPI instance() {
+		return InstanceHolder.INSTANCE;
 	}
 
-	@RequestMapping(value = "/admin", produces = "text/plain;charset=UTF-8")
-	public String admin() {
-		String result ="";
-		result = "권한접근";
-		return String.format("%s", result);
-	}
 }
