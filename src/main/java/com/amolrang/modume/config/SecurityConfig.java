@@ -1,11 +1,6 @@
 package com.amolrang.modume.config;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,13 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 
 import com.amolrang.modume.service.UserService;
-import com.amolrang.modume.utils.StringUtils;
 
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -55,13 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN");
 
 		// 권한 필요없는 경로 추가
-		http.formLogin().loginPage("/login").usernameParameter("id").defaultSuccessUrl("/")
+		http.formLogin().loginPage("/login").usernameParameter("user_id").defaultSuccessUrl("/")
 				.loginProcessingUrl("/loginAction").permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/access_token").permitAll();
-
 		// 권한없이 접근한 페이지로 보내는 곳
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}

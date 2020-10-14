@@ -15,7 +15,7 @@
       <fieldset class="fld-login">
         <legend class="legend">login</legend>
           <div class="input-container focus">
-              <label class="move active" for="id"></label><input type="text" class="no-border active " id="id" name="id" placeholder="ID"   options="{ updateOn: 'keyup blur' }" required >
+              <label class="move active" for="user_id"></label><input type="text" class="no-border active " id="user_id" name="user_id" placeholder="ID"   options="{ updateOn: 'keyup blur' }" required >
           </div>
           <div class="input-container focus">
             <label class="move active" for="password"></label><input type="password" class="no-border active" id="password" name="password" placeholder="PASSWORD" autocomplete="off"  options="{ updateOn: 'keyup blur' }"  required>
