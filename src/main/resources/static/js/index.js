@@ -5,6 +5,8 @@ var centralContainer = document.querySelector('.centralContainer');
 var stompClient = null;
 var inputChat = null;
 var username = null;
+var inputUl = null;
+
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -48,7 +50,7 @@ function openChat() {
 	inputChat = document.createElement('input');
 	inputChat.className = 'inputChat';
 	makeDiv.append(inputChat);
-	const inputUl = document.createElement('ul');
+	inputUl = document.createElement('ul');
 	inputUl.className = 'messageArea';
 	chatDiv.append(inputUl);
 	const btnChat = document.createElement('button');
@@ -125,7 +127,9 @@ function onMessageReceived(payload){
 	}else if(message.type === "LEVAE"){
 		message.content = message.sender + "left!";
 	}else{
-		messageElement.classList.add('chat-message');
+		/* 채팅창에 채팅 메세지 띄우기 */
+		messageElement.className='chat-message';
+		inputUl.append(messageElement);
 		
 		var avatarElement = document.createElement('i');
 		var avatarText = document.createElement(message.sender[0]);
