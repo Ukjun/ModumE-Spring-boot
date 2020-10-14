@@ -67,7 +67,7 @@ public class UserService implements UserDetailsService {
 			@Override
 			public String getUsername() {
 				// TODO Auto-generated method stub
-				return userModel.getId();
+				return userModel.getUser_id();
 			}
 
 			@Override

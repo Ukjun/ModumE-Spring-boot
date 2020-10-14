@@ -12,7 +12,7 @@ import lombok.Data;
 public class UserModel implements UserDetails {
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 	
-	private String id;
+	private String user_id;
 	private String password;
 	private int failCnt;
 	private boolean isAccountNonExpired;
@@ -25,46 +25,6 @@ public class UserModel implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.authorities;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setAccountNonExpired(boolean isAccountNonExpired) {
-		this.isAccountNonExpired = isAccountNonExpired;
-	}
-
-	public void setAccountNonLocked(boolean isAccountNonLocked) {
-		this.isAccountNonLocked = isAccountNonLocked;
-	}
-
-	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
-		this.isCredentialsNonExpired = isCredentialsNonExpired;
-	}
-
-	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
-	}
-
-	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
-
-	public int getFailCnt() {
-		return failCnt;
-	}
-
-	public void setFailCnt(int failCnt) {
-		this.failCnt = failCnt;
 	}
 
 	// UserDetails의 필수 메서드들

@@ -1,7 +1,5 @@
 package com.amolrang.modume.utils;
 
-import com.amolrang.modume.config.DatabaseCoinfiguration;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
