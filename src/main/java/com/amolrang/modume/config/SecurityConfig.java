@@ -1,6 +1,10 @@
 package com.amolrang.modume.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,7 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 
+import com.amolrang.modume.oauth.CustomOAuth2Provider;
 import com.amolrang.modume.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();
+		 http.authorizeRequests().antMatchers("/login/oauth2/**").permitAll().anyRequest().authenticated().and().oauth2Login();
 		// 권한없이 접근한 페이지로 보내는 곳
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}
@@ -58,5 +67,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public ClientRegistrationRepository clientRegistrationRepository() {
+		List<ClientRegistration> registrations = new ArrayList<>();
+		registrations.add(CustomOAuth2Provider.KAKAO.getBuilder("kakao").build());
+		log.info("registrations:{}"+registrations);
+		return new InMemoryClientRegistrationRepository(registrations);
 	}
 }
