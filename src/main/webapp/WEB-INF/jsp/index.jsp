@@ -4,7 +4,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal.username" var="username" />
+    <sec:authentication property="principal.id" var="username" />
 </sec:authorize>
 <sec:authorize access="!isAuthenticated()">
     <sec:authentication property="principal" var="username" />

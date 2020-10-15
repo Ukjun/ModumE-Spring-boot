@@ -27,6 +27,9 @@
       <div class="sbm-join">
         <a href="/join">sign up</a>
       </div>
+      <div>
+      <a href="/oauth2/authorization/kakao">Kakao</a>
+      </div>
     </div>
   </body>
   <script>
