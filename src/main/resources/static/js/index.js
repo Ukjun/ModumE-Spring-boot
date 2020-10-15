@@ -72,19 +72,6 @@ function closeContainer(ele) {
     ele.remove();
 }
 
-function connect(event){
-	username = 'user1';
-	console.log(username)
-	if(username){
-		console.log("connect Start")
-		var socket = new SockJS('/ws');
-		stompClient = Stomp.over(socket);
-		
-		stompClient.connect({},onConnected, onError);
-	}
-	/*event.preventDefault();*/
-}
-
 function onConnected(){
 	console.log("I don't know")
 	stompClient.subscribe('/topic/public', onMessageReceived);

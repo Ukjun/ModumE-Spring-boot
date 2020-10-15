@@ -32,57 +32,10 @@ public class UserService implements UserDetailsService {
 	PasswordEncoder passwordEncoder;
 
 	@Override
-	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		log.info(id);
-		UserModel userModel = userDAO.findById(id);
+	public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
+		UserModel userModel = userDAO.findById(user_id);
 		if(userModel == null) {return userModel;};
-		userModel.setAuthorities(getAuthorities(id));
-		UserDetails userDetails = new  UserDetails() {
-
-			@Override
-			public boolean isEnabled() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-
-			@Override
-			public boolean isCredentialsNonExpired() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-
-			@Override
-			public boolean isAccountNonLocked() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-
-			@Override
-			public boolean isAccountNonExpired() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-
-			@Override
-			public String getUsername() {
-				// TODO Auto-generated method stub
-				return userModel.getUser_id();
-			}
-
-			@Override
-			public String getPassword() {
-				// TODO Auto-generated method stub
-				return userModel.getPassword();
-			}
-
-			@Override
-			public Collection getAuthorities() {
-				// TODO Auto-generated method stub
-
-				return userModel.getAuthorities();
-			}
-		};
+		userModel.setAuthorities(getAuthorities(user_id));
 		return userModel;
 	}
 
@@ -93,7 +46,7 @@ public class UserService implements UserDetailsService {
 		userModel.setAccountNonLocked(true);
 		userModel.setCredentialsNonExpired(true);
 		userModel.setEnabled(true);
-		userModel.setUserName(userModel.getUsername());
+		userModel.setUsername(userModel.getUsername());
 		
 		log.info("userModel {}",userModel);
 		
@@ -101,7 +54,6 @@ public class UserService implements UserDetailsService {
 	}
 
 	public Collection<GrantedAuthority> getAuthorities(String id) {
-		//System.out.println(username);
 		List<String> string_authorities = userDAO.findAuthoritiesByID(id);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for (String authority : string_authorities) {

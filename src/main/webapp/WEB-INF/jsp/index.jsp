@@ -3,7 +3,12 @@
     <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
-<jsp:useBean id="StringUtils" class="com.amolrang.modume.utils.StringUtils"/>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal.username" var="username" />
+</sec:authorize>
+<sec:authorize access="!isAuthenticated()">
+    <sec:authentication property="principal" var="username" />
+</sec:authorize>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -74,6 +79,20 @@
     <!-- 트위치 채널 긁어오기(채널지정) -->
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <script>
+
+    function connect(event){
+    	username = '${username}';
+    	console.log(username)
+    	if(username){
+    		console.log("connect Start")
+    		var socket = new SockJS('/ws');
+    		stompClient = Stomp.over(socket);
+    		
+    		stompClient.connect({},onConnected, onError);
+    	}
+    	/*event.preventDefault();*/
+    }
+
     /* $.ajax({
     	 type: 'GET',
     	 url: 'https://api.twitch.tv/kraken/channels/twitch',

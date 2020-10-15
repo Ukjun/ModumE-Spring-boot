@@ -2,24 +2,23 @@ package com.amolrang.modume.model;
 
 import java.util.Collection;
 
+import javax.persistence.Id;
+
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
 @Data
 public class UserModel implements UserDetails {
-	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
-	
-	private String user_id;
+	private String id;
 	private String password;
 	private int failCnt;
 	private boolean isAccountNonExpired;
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
-	private String userName;
+	private String username;
 	private Collection<? extends GrantedAuthority> authorities;
 
 	@Override
@@ -37,7 +36,7 @@ public class UserModel implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.userName;
+		return this.username;
 	}
 
 	@Override

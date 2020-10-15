@@ -19,7 +19,7 @@ public class JsonController {
 	@RequestMapping(value = "/IdChk", produces="text/plain;charset=UTF-8")
 	public String IdChk(@RequestBody UserModel param) {
 		String result ="2";
-		if(userService.loadUserByUsername(param.getUser_id()) != null ) {
+		if(userService.loadUserByUsername(param.getId()) != null ) {
 			result = "3";
 		}
 		return String.format("%s", result);

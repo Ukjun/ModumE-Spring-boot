@@ -22,7 +22,7 @@ public class UserDAO {
 
 	public UserModel save(UserModel userModel, String role) {
 		userMapper.insertUser(userModel);
-		userMapper.insertUserAutority(userModel.getUser_id(), role);
+		userMapper.insertUserAutority(userModel.getId(), role);
 		return userModel;
 	}
 
