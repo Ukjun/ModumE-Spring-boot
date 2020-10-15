@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 
+import com.amolrang.modume.oauth.CommonOAuth2Provider;
 import com.amolrang.modume.oauth.CustomOAuth2Provider;
 import com.amolrang.modume.service.UserService;
 
@@ -61,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		
-		http.authorizeRequests().antMatchers("/login/oauth2/**").permitAll().and().oauth2Login();
+		http.authorizeRequests().antMatchers("/oauth2/**").permitAll().and().oauth2Login();
 		// 권한없이 접근한 페이지로 보내는 곳
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}
@@ -75,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public ClientRegistrationRepository clientRegistrationRepository() {
 		List<ClientRegistration> registrations = new ArrayList<>();
 		registrations.add(CustomOAuth2Provider.KAKAO.getBuilder("kakao").build());
+		//registrations.add(CommonOAuth2Provider.GOOGLE.getBuilder("google").build());
 		log.info("registrations:{}"+registrations);
 		return new InMemoryClientRegistrationRepository(registrations);
 	}

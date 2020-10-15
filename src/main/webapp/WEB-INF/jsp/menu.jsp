@@ -18,20 +18,9 @@
 		<p>
 			principal :
 			<sec:authentication property="principal" />
-		</p>
-		<p>
-			아이디 :
-			<sec:authentication property="principal.id" />
-		</p>
-		<p>
-			이름 :
-			<sec:authentication property="principal.username" />
-		</p>
-		<p>
-			권한 :
-			<sec:authentication property="principal.authorities" />
-		</p>
+			</p>
 		<a href="/logout">로그아웃</a>
+		<a href="/">메인화면</a>
 	</sec:authorize>
 
 
