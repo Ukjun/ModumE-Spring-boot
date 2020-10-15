@@ -97,6 +97,19 @@
     border-radius: 5px;
     position: relative;
 }
+.chatContainer .hidden{
+	margin : 0 auto;
+	width : 90%;
+	height : 66vh;
+	background-color: white;
+}
+.charContainer .inputChat{
+	width : 70%;
+	height : 30px;
+}
+.charContainer .btnChat{
+	
+}
 
 .boardContainer {
     width: 30%;

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <jsp:useBean id="StringUtils" class="com.amolrang.modume.utils.StringUtils"/>
 <html>
@@ -42,14 +44,18 @@
             <!-- jsp include -->
             <div class="sectionContainer">
                 <div class="slideContainer">
+                	<%-- <video autoplay="autoplay" controls>
+                		<source src = "/videos/${videoName }" type="video/mp4">	
+                	</video> --%>
                     <div class="slide slide__left">
                         <span class="material-icons">keyboard_arrow_left</span>
                     </div>
-                    <div class="slide slide__center"></div>
+                    <div class="slide slide__center" id="twitch-embed"></div>
                     <div class="slide slide__right">
                         <span class="material-icons">keyboard_arrow_right</span>
                     </div>
                 </div>
+                <!-- 채팅관련 창 나오는 곳  -->
             </div>
             <aside class="centralSidebar">
                 <div class="menus sidebarMenu1_1">
@@ -61,6 +67,33 @@
             </aside>
         </section>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 트위치 채널 긁어오기(채널지정) -->
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+    <script>
+    /* $.ajax({
+    	 type: 'GET',
+    	 url: 'https://api.twitch.tv/kraken/channels/twitch',
+    	 headers: {
+    	   'Client-ID': '95put5vj4zw23iiy5poetela3ilbq6'
+    	 },
+    	 success: function(data) {
+    	   console.log(data);
+    	 }
+    	});
+      
+    xhr.send(); */
+    /* new Twitch.Embed("twitch-embed", {
+        width: 854,
+        height: 480,
+        channel: "2chamcham2",
+        // only needed if your site is also embedded on embed.example.com and othersite.example.com 
+        parent: ["embed.example.com", "othersite.example.com"]
+      }); */
+    
+    </script>
 </body>
 </html>
