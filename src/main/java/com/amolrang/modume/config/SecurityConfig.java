@@ -59,7 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();
-		 http.authorizeRequests().antMatchers("/login/oauth2/**").permitAll().anyRequest().authenticated().and().oauth2Login();
+		http.authorizeRequests().antMatchers("/login").permitAll();
+		
+		http.authorizeRequests().antMatchers("/login/oauth2/**").permitAll().and().oauth2Login();
 		// 권한없이 접근한 페이지로 보내는 곳
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}
