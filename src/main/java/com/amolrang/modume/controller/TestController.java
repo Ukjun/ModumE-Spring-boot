@@ -20,7 +20,7 @@ public class TestController {
 	@Autowired
 	private TestService service;
 	
-	@RequestMapping( value = "/test", produces="text/plain;charset=UTF-8")
+	@RequestMapping(value = "/test", produces="text/plain;charset=UTF-8")
 	public String test() {
 		String result = "test";
 		log.info(result);

@@ -41,10 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		//로그아웃추가
 		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/");
+		
 		//권한 필요한 경로 추가
-		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN");
+		// /admin 주소는 ADMIN 권한을 가진 사람만 접속 가능
+		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN"); 
 		
 		//권한 필요없는 경로 추가
+		// permitAll은 모든 권한 다 됨
 		http.formLogin().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/loginAction").permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
@@ -54,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}
 	
+	// 패스워드 암호화
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();

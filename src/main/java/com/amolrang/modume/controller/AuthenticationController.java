@@ -29,7 +29,7 @@ public class AuthenticationController{
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginAction(Model model) {
 		log.info("로그인 페이지 post 접근");
-		return "redirect:" + StringUtils.LoginURLValue();
+		return "redirect:" + StringUtils.LoginURLValue(); // "/login"
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -41,7 +41,7 @@ public class AuthenticationController{
 	}
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joinAction(Model model,UserModel userModel) {
+	public String joinAction(Model model, UserModel userModel) {
 		log.info("회원가입 post 접근");
 		userService.save(userModel, "ROLE_MEMBER");
 		return "redirect:"+StringUtils.LoginURLValue();
