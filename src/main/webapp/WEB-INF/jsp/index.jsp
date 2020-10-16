@@ -115,5 +115,10 @@
       }); */
     
     </script>
+    
+    <script type="text/javascript">
+    // test script user info
+    console.log('${userInfo}')
+    </script>
 </body>
 </html>

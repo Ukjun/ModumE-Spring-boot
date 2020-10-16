@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
@@ -55,13 +57,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// 권한 필요없는 경로 추가
 		http.formLogin().loginPage("/login").usernameParameter("user_id").defaultSuccessUrl("/")
-				.loginProcessingUrl("/loginAction").permitAll();
+				.permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		
-		http.authorizeRequests().antMatchers("/login/oauth2/**").permitAll().and().oauth2Login().loginPage("/login");
+		http.authorizeRequests().antMatchers("/login/oauth2/**").permitAll()
+		.and()
+		.oauth2Login().loginPage("/login").defaultSuccessUrl("/login_success")
+		.clientRegistrationRepository(clientRegistrationRepository())
+		.authorizedClientService(authorizedClientService());
 		// 권한없이 접근한 페이지로 보내는 곳
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}
@@ -70,7 +76,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+	
+	@Bean
+    public OAuth2AuthorizedClientService authorizedClientService(){
+        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
+    }
+	
 	@Bean
 	public ClientRegistrationRepository clientRegistrationRepository() {
 		List<ClientRegistration> registrations = new ArrayList<>();
