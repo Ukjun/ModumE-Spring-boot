@@ -3,6 +3,7 @@ package com.amolrang.modume.oauth;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 
 public enum CustomOAuth2Provider {
 
@@ -19,8 +20,39 @@ public enum CustomOAuth2Provider {
                     .userNameAttributeName("id") // userInfo API Response에서 얻어올 ID 프로퍼티
                     .clientName("kakao"); // spring 내에서 인식할 OAuth2 Provider Name
         }
-    };
-
+    }, 
+    NAVER{
+	    @Override
+	    public ClientRegistration.Builder getBuilder(String registrationID) {
+	        return getBuilder("naver", ClientAuthenticationMethod.BASIC)
+	                //.scope("user:edit","user:read:email") // 요청할 권한
+	                .authorizationUri("https://nid.naver.com/oauth2.0/authorize") // authorization code 얻는 API
+	                .tokenUri("https://nid.naver.com/oauth2.0/token") // access Token 얻는 API
+	                .userInfoUri("https://openapi.naver.com/v1/nid/me") // 유저 정보 조회 API
+	                .clientId("xszt5SB2ywYHD8jD4Tlh")
+	                .clientSecret("ScrP_LkFDZ")
+	                //임시조치
+	                .userNameAttributeName("resultcode") // userInfo API Response에서 얻어올 ID 프로퍼티
+	                .clientName("naver"); // spring 내에서 인식할 OAuth2 Provider Name
+	    }
+	},
+	TWITCH{
+	    @Override
+	    public ClientRegistration.Builder getBuilder(String registrationID) {
+	    	ClientRegistration.Builder builder = getBuilder(registrationID, ClientAuthenticationMethod.BASIC);
+			builder.scope("openid","user:edit","user:read:email");
+			builder.authorizationUri("https://id.twitch.tv/oauth2/authorize");
+			builder.tokenUri("https://id.twitch.tv/oauth2/token");
+			builder.jwkSetUri("https://id.twitch.tv/oauth2/keys");
+			builder.userInfoUri("https://id.twitch.tv/oauth2/userinfo");
+			builder.userNameAttributeName("_id");
+			builder.clientName("twitch");
+			builder.clientId("nb7cdnmp6y4wuqcnfh31c92oh0k8l7");
+			builder.clientSecret("sB_WQ5-m2nbwqd516w81sh4ju42u7imymg0mo");
+			return builder;
+	    }
+	};
+	
     private static final String DEFAULT_LOGIN_REDIRECT_URL = "{baseUrl}/login/oauth2/code/{registrationId}";
 
     protected final ClientRegistration.Builder getBuilder(String registrationId,

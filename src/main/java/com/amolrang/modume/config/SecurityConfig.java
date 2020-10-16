@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//auth.userDetailsService(userService).passwordEncoder(encoder());
 		auth.userDetailsService(userService).passwordEncoder(encoder());
+		//auth.authenticationProvider(authenticationProvider).userDetailsSesrvice(유저디테일스서비스 임플리먼츠한 클래스)
 		log.info("auth:{}",auth);
 	}
 
@@ -75,8 +76,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public ClientRegistrationRepository clientRegistrationRepository() {
 		List<ClientRegistration> registrations = new ArrayList<>();
+		registrations.add(CommonOAuth2Provider.GOOGLE.getBuilder("google").build());
 		registrations.add(CustomOAuth2Provider.KAKAO.getBuilder("kakao").build());
-		//registrations.add(CommonOAuth2Provider.GOOGLE.getBuilder("google").build());
+		registrations.add(CustomOAuth2Provider.TWITCH.getBuilder("twitch").build());
+		registrations.add(CustomOAuth2Provider.NAVER.getBuilder("naver").build());
 		log.info("registrations:{}"+registrations);
 		return new InMemoryClientRegistrationRepository(registrations);
 	}

@@ -1,5 +1,7 @@
 package com.amolrang.modume.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +22,8 @@ public class AuthenticationController{
 	UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginViewFrame(Model model) {
-		log.info("로그인페이지 GET접근");
+	public String loginViewFrame(Model model,Principal principal) {
+		log.info("로그인페이지 GET접근 :{}",principal);
 		model.addAttribute(StringUtils.TitleKey(), "로그인페이지");
 		return StringUtils.LoginURLValue();
 	}

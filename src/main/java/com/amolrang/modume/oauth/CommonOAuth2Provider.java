@@ -18,9 +18,13 @@ public enum CommonOAuth2Provider {
 			builder.userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo");
 			builder.userNameAttributeName(IdTokenClaimNames.SUB);
 			builder.clientName("Google");
+			builder.clientId("327498212271-k08jmuqgri0octbl5tt78h749pf5irg5.apps.googleusercontent.com");
+			builder.clientSecret("sB_WQ5-BCPHXcvEcSjoeUyI8");
 			return builder;
 		}
 	};
+	
+	
 
     private static final String DEFAULT_REDIRECT_URL = "{baseUrl}/login/oauth2/code/{registrationId}";
 

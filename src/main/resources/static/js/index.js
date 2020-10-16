@@ -7,12 +7,6 @@ var inputChat = null;
 var username = null;
 var inputUl = null;
 
-
-var colors = [
-    '#2196F3', '#32c787', '#00BCD4', '#ff5652',
-    '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
-];
-
 function chatInit() {
     const chatContainer = document.querySelector('.chatContainer');
     const boardContainer = document.querySelector('.boardContainer');
@@ -118,15 +112,6 @@ function onMessageReceived(payload){
 		messageElement.className='chat-message';
 		inputUl.append(messageElement);
 		
-		var avatarElement = document.createElement('i');
-		var avatarText = document.createElement(message.sender[0]);
-		avatarElement.appendChild(avatarText);
-		avatarElement.style['background-color'] = getAvatarColor(message.sender);
-		
-		
-		messageElement.appendChild(avatarElement);
-		
-		
 		var usernameElement = document.createElement('span');
 		var usernameText = document.createTextNode(message.sender);
 		usernameElement.appendChild(usernameText);
@@ -137,14 +122,6 @@ function onMessageReceived(payload){
 	textElement.appendChild(messageText);
 	
 	messageElement.appendChild(textElement);
-}
-function getAvatarColor(messageSender) {
-    var hash = 0;
-    for (var i = 0; i < messageSender.length; i++) {
-        hash = 31 * hash + messageSender.charCodeAt(i);
-    }
-    var index = Math.abs(hash % colors.length);
-    return colors[index];
 }
 
 /*usernameForm.addEventListener('submit', connect, true)*/

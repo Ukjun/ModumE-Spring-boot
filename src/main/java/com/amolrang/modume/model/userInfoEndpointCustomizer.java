@@ -8,8 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Data;
 
 @Data
-public class NewUserModel implements UserDetails{
-
+public class userInfoEndpointCustomizer implements UserDetails{
 
 	private String username;
 	private String password;

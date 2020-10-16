@@ -5,7 +5,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal.id" var="username" />
+    <sec:authentication property="principal.name" var="username" />
 </sec:authorize>
 <sec:authorize access="!isAuthenticated()">
     <sec:authentication property="principal" var="username" />
@@ -75,7 +75,7 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script src="/js/index.js"></script>
+    <script src="/js/index.js?ver=1"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- 트위치 채널 긁어오기(채널지정) -->
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
