@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -42,8 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// log.info("권한접근승인여부");
+		//auth.userDetailsService(userService).passwordEncoder(encoder());
 		auth.userDetailsService(userService).passwordEncoder(encoder());
+		log.info("auth:{}",auth);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		
-		http.authorizeRequests().antMatchers("/oauth2/**").permitAll().and().oauth2Login();
+		http.authorizeRequests().antMatchers("/login/oauth2/**").permitAll().and().oauth2Login().loginPage("/login");
 		// 권한없이 접근한 페이지로 보내는 곳
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}

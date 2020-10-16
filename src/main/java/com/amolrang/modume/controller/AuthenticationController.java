@@ -25,12 +25,6 @@ public class AuthenticationController{
 		model.addAttribute(StringUtils.TitleKey(), "로그인페이지");
 		return StringUtils.LoginURLValue();
 	}
-	
-	@RequestMapping(value = "/loginAction", method = RequestMethod.POST)
-	public String loginAction(Model model) {
-		log.info("로그인 페이지 post 접근");
-		return "redirect:" + StringUtils.LoginURLValue();
-	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join(Model model) {

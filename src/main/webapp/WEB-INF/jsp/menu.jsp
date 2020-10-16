@@ -18,7 +18,6 @@
 		<p>
 			principal :
 			<sec:authentication property="principal" />
-			</p>
 		<a href="/logout">로그아웃</a>
 		<a href="/">메인화면</a>
 	</sec:authorize>
