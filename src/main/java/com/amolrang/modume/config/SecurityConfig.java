@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		List<ClientRegistration> registrations = new ArrayList<>();
 		registrations.add(CommonOAuth2Provider.GOOGLE.getBuilder("google").build());
 		registrations.add(CustomOAuth2Provider.KAKAO.getBuilder("kakao").build());
-		registrations.add(CustomOAuth2Provider.TWITCH.getBuilder("twitch").build());
+		registrations.add(CommonOAuth2Provider.TWITCH.getBuilder("twitch").build());
 		registrations.add(CustomOAuth2Provider.NAVER.getBuilder("naver").build());
 		log.info("registrations:{}"+registrations);
 		return new InMemoryClientRegistrationRepository(registrations);

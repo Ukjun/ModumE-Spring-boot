@@ -22,6 +22,20 @@ public enum CommonOAuth2Provider {
 			builder.clientSecret("sB_WQ5-BCPHXcvEcSjoeUyI8");
 			return builder;
 		}
+	},
+	TWITCH{
+	    @Override
+	    public ClientRegistration.Builder getBuilder(String registrationID) {
+	    	return getBuilder("twitch", ClientAuthenticationMethod.POST)
+			.scope("user:edit","user:read:email"/*,"openid"*/)
+			.authorizationUri("https://id.twitch.tv/oauth2/authorize")
+			.tokenUri("https://id.twitch.tv/oauth2/token")
+			.userInfoUri("https://id.twitch.tv/oauth2/userinfo")
+			.userNameAttributeName(IdTokenClaimNames.SUB)
+			.clientName("twitch")
+			.clientId("nb7cdnmp6y4wuqcnfh31c92oh0k8l7")
+			.clientSecret("u3cpdd9wnlnrmkh1fh8ar4kr7iu12n");
+	    }
 	};
 	
 	
