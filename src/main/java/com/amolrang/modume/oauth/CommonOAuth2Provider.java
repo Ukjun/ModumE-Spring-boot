@@ -8,6 +8,8 @@ import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 
 public enum CommonOAuth2Provider {
 	GOOGLE {
+		// API KEY
+		// AIzaSyAr2aW-trtWelUhL-bxfHgcztE1AAxFKiU
 		@Override
 		public Builder getBuilder(String registrationID) {
 			ClientRegistration.Builder builder = getBuilder(registrationID, ClientAuthenticationMethod.BASIC);

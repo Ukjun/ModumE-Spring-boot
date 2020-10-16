@@ -32,4 +32,4 @@ public class TestController {
 		log.info("chatMessage : {}" + chatMessage.toString());
 		return chatMessage;
 	}
-}
+ }
