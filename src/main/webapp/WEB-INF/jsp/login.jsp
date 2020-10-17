@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="container">
-		<form id="frm" action="/loginAction" method="post">
+		<form id="frm" action="/login" method="post">
 			<fieldset class="fld-login">
 				<legend class="legend">login</legend>
 				<div class="input-container focus">

@@ -5,7 +5,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal.name" var="username" />
+    <sec:authentication property="principal" var="username" />
 </sec:authorize>
 <sec:authorize access="!isAuthenticated()">
     <sec:authentication property="principal" var="username" />
@@ -82,7 +82,7 @@
     <script>
 
     function connect(event){
-    	username = '${username}';
+    	username = '${username.name}';
     	console.log(username)
     	if(username){
     		console.log("connect Start")

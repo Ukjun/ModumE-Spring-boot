@@ -3,13 +3,12 @@ package com.amolrang.modume.controller;
 import java.security.Principal;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -31,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class AuthenticationController {
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	@Autowired
 	private OAuth2AuthorizedClientService authorizedClientService;
 
@@ -43,7 +42,7 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value = "/login_success", method = RequestMethod.GET)
-	public String login_success(Model model, OAuth2AuthenticationToken authentication,RedirectAttributes ra) {
+	public String login_success(Model model, OAuth2AuthenticationToken authentication,RedirectAttributes ra,AuthenticationManagerBuilder auth) {
 		log.info("로그인 성공 페이지 GET접근 :{}", authentication);
 		model.addAttribute(StringUtils.TitleKey(), "로그인 성공 페이지");
 
@@ -54,7 +53,7 @@ public class AuthenticationController {
 		String userInfoEndpointUri = client.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri();
 		log.info("userInfoEndpointUri:{}", userInfoEndpointUri);
 		
-		// api 요청
+		// api 유저정보 요청
 		if (!StringUtils.isEmpty(userInfoEndpointUri)) {
 			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
@@ -70,7 +69,7 @@ public class AuthenticationController {
 			log.info("response:{}", response);
 			model.addAttribute("userInfo", userAttributes);
 			ra.addFlashAttribute("userInfo", userAttributes);
-		}
+		}		
 		return "redirect:/main";
 	}
 
@@ -81,6 +80,9 @@ public class AuthenticationController {
 		case "facebook":
 			uriBuilder.queryParam("fields", "name,email,picture,locale");
 			break;
+			
+			default:
+				uriBuilder.query("");
 		}
 
 		return uriBuilder.toUriString();
