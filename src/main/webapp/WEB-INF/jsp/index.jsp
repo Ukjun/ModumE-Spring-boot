@@ -82,7 +82,7 @@
     <script>
 
     function connect(event){
-    	username = '${username.name}';
+    	username = '';
     	console.log(username)
     	if(username){
     		console.log("connect Start")
