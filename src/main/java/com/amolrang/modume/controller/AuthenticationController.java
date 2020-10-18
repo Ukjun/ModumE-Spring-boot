@@ -8,7 +8,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -85,6 +84,12 @@ public class AuthenticationController {
 		}
 
 		return uriBuilder.toUriString();
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String loginAction(Model model) {
+		log.info("로그인 페이지 post 접근");
+		return "redirect:" + StringUtils.LoginURLValue(); // "/login"
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
