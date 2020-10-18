@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests().antMatchers("/login/oauth2/**").permitAll()
 		.and()
-		.oauth2Login().loginPage("/login")//.defaultSuccessUrl("/login_success")
+		.oauth2Login().loginPage("/login").defaultSuccessUrl("/login_success")
 		.clientRegistrationRepository(clientRegistrationRepository())
 		.authorizedClientService(authorizedClientService());
 		// 권한없이 접근한 페이지로 보내는 곳

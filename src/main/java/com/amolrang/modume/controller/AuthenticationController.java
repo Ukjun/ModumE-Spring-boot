@@ -42,7 +42,7 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value = "/login_success", method = RequestMethod.GET)
-	public String login_success(Model model, OAuth2AuthenticationToken authentication,RedirectAttributes ra,AuthenticationManagerBuilder auth) {
+	public String login_success(Model model, OAuth2AuthenticationToken authentication, RedirectAttributes ra) {
 		log.info("로그인 성공 페이지 GET접근 :{}", authentication);
 		model.addAttribute(StringUtils.TitleKey(), "로그인 성공 페이지");
 
@@ -52,7 +52,6 @@ public class AuthenticationController {
 
 		String userInfoEndpointUri = client.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri();
 		log.info("userInfoEndpointUri:{}", userInfoEndpointUri);
-		
 		// api 유저정보 요청
 		if (!StringUtils.isEmpty(userInfoEndpointUri)) {
 			RestTemplate restTemplate = new RestTemplate();
@@ -69,7 +68,7 @@ public class AuthenticationController {
 			log.info("response:{}", response);
 			model.addAttribute("userInfo", userAttributes);
 			ra.addFlashAttribute("userInfo", userAttributes);
-		}		
+		}
 		return "redirect:/main";
 	}
 
@@ -80,9 +79,9 @@ public class AuthenticationController {
 		case "facebook":
 			uriBuilder.queryParam("fields", "name,email,picture,locale");
 			break;
-			
-			default:
-				uriBuilder.query("");
+
+		default:
+			uriBuilder.query("");
 		}
 
 		return uriBuilder.toUriString();
