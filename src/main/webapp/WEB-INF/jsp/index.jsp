@@ -14,7 +14,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<div id="bg1">
+	<div class="loginWindow">
+		<div class="loginPageContainer">
+		<div class="closeLoginWindow">
+			<span class="material-icons" onclick="hideLogin()">clear</span>
+		</div>
+			<jsp:include page="/login"></jsp:include>
+		</div>
+	</div>
+	<div id="bg1">
         <img src="/img/yousef-salhamoud-kQ6mh2yagDw-unsplash.jpg" alt="" id="bg1_1">
     </div>
     <main class="centralContainer">
