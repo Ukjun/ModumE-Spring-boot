@@ -27,16 +27,18 @@
 			<a href="/join">sign up</a>
 		</div>
 		<div>
-			<a href="/oauth2/authorization/kakao">Kakao</a>
-		</div>
-		<div>
-			<a href="/oauth2/authorization/google">Google</a>
-		</div>
-		<div>
-			<a href="/oauth2/authorization/twitch">twitch</a>
-		</div>
-		<div>
-			<a href="/oauth2/authorization/naver">naver</a>
+			<div class="input-container focus">
+				<a href="/oauth2/authorization/kakao">Kakao</a>
+			</div>
+			<div class="input-container focus">
+				<a href="/oauth2/authorization/google">Google</a>
+			</div>
+			<div class="input-container focus">
+				<a href="/oauth2/authorization/twitch">twitch</a>
+			</div>
+			<div class="input-container focus">
+				<a href="/oauth2/authorization/naver">naver</a>
+			</div>
 		</div>
 	</div>
 </body>
