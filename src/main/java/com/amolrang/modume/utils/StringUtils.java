@@ -1,11 +1,7 @@
 package com.amolrang.modume.utils;
 
-import org.springframework.lang.Nullable;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class StringUtils extends org.springframework.util.StringUtils{
 	//타이틀 화면 키,
 	public final static String TitleKey() {return "title";}

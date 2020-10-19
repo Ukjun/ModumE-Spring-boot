@@ -2,8 +2,6 @@ package com.amolrang.modume.model;
 
 import java.util.Collection;
 
-import javax.persistence.Id;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
