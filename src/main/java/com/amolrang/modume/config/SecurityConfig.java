@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+		// static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
 		web.ignoring().antMatchers("/favicon.ico");
 		web.ignoring().antMatchers("/css/**");
 		web.ignoring().antMatchers("/js/**");
@@ -54,13 +55,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//로그아웃추가
 		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/");
 		
-		//권한 필요한 경로 추가
+		// 권한 필요한 경로 추가
+		// antMatchers("주소") -> 주소 매칭
 		// /admin 주소는 ADMIN 권한을 가진 사람만 접속 가능
 		http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN"); 
 		
-		//권한 필요없는 경로 추가
+		// 권한 필요없는 경로 추가
+		// loginPage("/login") -> 기본 spring security 로그인 페이지를 내 /login 주소로 매핑함
 		// permitAll은 모든 권한 다 됨
-		//
+		
+		// 로그인 form에서 아이디는 name=username인 input을 기본으로 인식하는데, usernameParameter() 메서드를 통해 파라미터명을 변경할 수 있음
 		http.formLogin().loginPage("/login").usernameParameter("user_id").defaultSuccessUrl("/main").permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
@@ -72,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.oauth2Login().loginPage("/login").defaultSuccessUrl("/login_success")
 		.clientRegistrationRepository(clientRegistrationRepository())
 		.authorizedClientService(authorizedClientService());
+		
 		// 권한없이 접근한 페이지로 보내는 곳
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}
@@ -83,18 +88,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
+	// OAuth2 토큰 주고 받는 서비스
     public OAuth2AuthorizedClientService authorizedClientService(){
         return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository());
     }
 	
+	/* 
+	 * ClientRegistration - Oauth2에 등록된 Client의 정보를 나타내는 클래스
+						  - registrationId를 통해 기초 설정이 된 ClientRegistration을 저장해두고 추후 사용하는 곳에서
+						    ClientRegistration.getBuilder(registrationId)를 이용해서 가져와 추가 설정을 할 수 있음
+	   ClientRegistrationRepository - Oauth2 제공자들(google, kakao 등)에게 등록된 우리 App의 정보들은 궁극적으로 Oauth2 제공자에 저장되기 때문에 
+	      							    우리 App의 Server에서 요청하기 위해서는 이 정보들을 별도로 가지고 있어야 함
+               						    이런 Oauth2에 등록된 App의 정보들의 복사본이 저장되어 관리되는 클래스
+	 */
 	@Bean
+	// 인증 사이트(google, kakao 등)의 OAuth2의 등록 정보를 담고 있음
 	public ClientRegistrationRepository clientRegistrationRepository() {
 		List<ClientRegistration> registrations = new ArrayList<>();
 		registrations.add(CommonOAuth2Provider.GOOGLE.getBuilder("google").build());
 		registrations.add(CustomOAuth2Provider.KAKAO.getBuilder("kakao").build());
 		registrations.add(CommonOAuth2Provider.TWITCH.getBuilder("twitch").build());
 		registrations.add(CustomOAuth2Provider.NAVER.getBuilder("naver").build());
-		log.info("registrations:{}"+registrations);
+		log.info("registrations:{}" + registrations);
 		return new InMemoryClientRegistrationRepository(registrations);
 	}
 }
