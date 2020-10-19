@@ -7,21 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${title }</title>
+<title>${title}</title>
 </head>
 <body>
-	<sec:authorize access="isAnonymous()">
-		<a href="/login">로그인</a>
-		<a href="/join">회원가입</a>
-	</sec:authorize>
-	<sec:authorize access="isAuthenticated()">
-		<p>
-			principal :
-			<sec:authentication property="principal" />
-		<a href="/logout">로그아웃</a>
-		<a href="/">메인화면</a>
-	</sec:authorize>
-
-
+	
 </body>
 </html>

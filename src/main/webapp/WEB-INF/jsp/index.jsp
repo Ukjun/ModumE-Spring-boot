@@ -4,12 +4,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal" var="username" />
-</sec:authorize>
-<sec:authorize access="!isAuthenticated()">
-    <sec:authentication property="principal" var="username" />
-</sec:authorize>
+<sec:authorize var="isLogin" access="isAuthenticated()"/>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -19,7 +14,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<div id="bg1">
+	<div class="loginWindow">
+		<div class="loginPageContainer">
+		<div class="closeLoginWindow">
+			<span class="material-icons" onclick="hideLogin()">clear</span>
+		</div>
+			<jsp:include page="/login"></jsp:include>
+		</div>
+	</div>
+	<div id="bg1">
         <img src="/img/yousef-salhamoud-kQ6mh2yagDw-unsplash.jpg" alt="" id="bg1_1">
     </div>
     <main class="centralContainer">
@@ -42,7 +45,7 @@
                     <span class="material-icons" onclick="alertMenuInit()">notifications_none</span>
                 </div>
                 <div class="menus centralMenu1_2">
-                    <span class="material-icons" onclick="userMenuInit()">person_outline</span>
+                    <span class="material-icons" onclick="userMenuInit(${isLogin})">person_outline</span>
                 </div>
             </div>
         </header>
@@ -76,6 +79,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/js/index.js?aaa=1"></script>
+    <script src="/js/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- 트위치 채널 긁어오기(채널지정) -->
     <script src="https://embed.twitch.tv/embed/v1.js"></script>

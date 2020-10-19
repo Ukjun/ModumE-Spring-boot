@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.amolrang.modume.mapper.UserMapper;
 import com.amolrang.modume.model.UserModel;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Repository
 public class UserDAO {
 	@Autowired
