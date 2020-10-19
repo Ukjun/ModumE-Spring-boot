@@ -19,6 +19,10 @@
     top: 13px;
 }
 
+.cursor{
+	cursor: pointer;
+}
+
 .centralHeader{
     display: flex;
     justify-content: space-between;

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${title }</title>
+<title>${title}</title>
 </head>
 <body>
 	<sec:authorize access="isAnonymous()">
@@ -21,7 +21,5 @@
 		<a href="/logout">로그아웃</a>
 		<a href="/">메인화면</a>
 	</sec:authorize>
-
-
 </body>
 </html>
