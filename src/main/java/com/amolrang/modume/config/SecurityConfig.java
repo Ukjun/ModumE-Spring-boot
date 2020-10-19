@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//권한 필요없는 경로 추가
 		// permitAll은 모든 권한 다 됨
 		//
-		http.formLogin().loginPage("/login").defaultSuccessUrl("/").loginProcessingUrl("/loginAction").permitAll();
+		http.formLogin().loginPage("/login").usernameParameter("user_id").defaultSuccessUrl("/main").permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();
