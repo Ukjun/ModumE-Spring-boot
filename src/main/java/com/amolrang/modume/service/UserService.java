@@ -30,6 +30,7 @@ public class UserService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
+		log.info(user_id);
 		UserModel userModel = userDAO.findById(user_id);
 		if(userModel == null) {return userModel;};
 		userModel.setAuthorities(getAuthorities(user_id));

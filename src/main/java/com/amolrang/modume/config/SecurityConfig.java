@@ -44,8 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userService).passwordEncoder(encoder());
-		log.info("auth:{}",auth);
+		// passwordEncoder() -> spring security 5.0부터 필수!!
+		// userDetailsService를 사용하려면 무조건 userService를 인자로 넣어줘야 함
+		auth.userDetailsService(userService).passwordEncoder(encoder()); // 검색해보기!!!
+		log.info("auth:{}", auth);
 	}
 
 	@Override
