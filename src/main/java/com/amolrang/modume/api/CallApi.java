@@ -42,7 +42,14 @@ public class CallApi {
 
 			log.info("response:{}", response);
 			log.info("userInfo{}", response.getBody());
-			
+			switch(authentication.getAuthorizedClientRegistrationId()) {
+			case "naver":
+				response.getBody();
+				//json obj
+				//obj => 추출
+				//return할때 json으로 정리해서 보내기.
+				return null;
+			}
 			return response.getBody();
 		}
 		return null;
