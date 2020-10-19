@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/index.css?www=121">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -39,10 +39,10 @@
             </div>
             <div class="centralMenu">
                 <div class="menus centralMenu1_1">
-                    <span class="material-icons">notifications_none</span>
+                    <span class="material-icons" onclick="alertMenuInit()">notifications_none</span>
                 </div>
                 <div class="menus centralMenu1_2">
-                    <span class="material-icons"><a href="/menu">person_outline</a></span>
+                    <span class="material-icons" onclick="userMenuInit()">person_outline</span>
                 </div>
             </div>
         </header>
@@ -75,7 +75,7 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script src="/js/index.js?ver=1"></script>
+    <script src="/js/index.js?aaa=1"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- 트위치 채널 긁어오기(채널지정) -->
     <script src="https://embed.twitch.tv/embed/v1.js"></script>

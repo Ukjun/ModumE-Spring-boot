@@ -50,6 +50,10 @@
     display: flex;
 }
 
+.centralMenu1_2{
+	position: relative;
+}
+
 .centralHeader .material-icons{
     cursor: pointer;
     font-size: 2.5em;
