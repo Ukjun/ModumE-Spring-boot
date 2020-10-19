@@ -4,12 +4,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<sec:authorize access="isAuthenticated()">
-    <sec:authentication property="principal" var="username" />
-</sec:authorize>
-<sec:authorize access="!isAuthenticated()">
-    <sec:authentication property="principal" var="username" />
-</sec:authorize>
+<sec:authorize var="isLogin" access="isAuthenticated()"/>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -42,7 +37,7 @@
                     <span class="material-icons" onclick="alertMenuInit()">notifications_none</span>
                 </div>
                 <div class="menus centralMenu1_2">
-                    <span class="material-icons" onclick="userMenuInit()">person_outline</span>
+                    <span class="material-icons" onclick="userMenuInit(${isLogin})">person_outline</span>
                 </div>
             </div>
         </header>
@@ -76,6 +71,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/js/index.js?aaa=1"></script>
+    <script src="/js/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- 트위치 채널 긁어오기(채널지정) -->
     <script src="https://embed.twitch.tv/embed/v1.js"></script>

@@ -124,14 +124,14 @@ function onMessageReceived(payload){
 	messageElement.appendChild(textElement);
 }
 
-function userMenuInit() {
+function userMenuInit(isLogin) {
     const userMenu = document.querySelector('.userMenu');
     const alertMenu = document.querySelector('.alertMenu');
     if(alertMenu != null) {
         closeContainer(alertMenu);
     }
 	if(userMenu == null) {
-		openUserMenu();
+		openUserMenu(isLogin);
 	} else {
 		closeContainer(userMenu);
 	}
@@ -150,7 +150,7 @@ function alertMenuInit() {
 	}
 }
 
-function openUserMenu() {
+function openUserMenu(isLogin) {
     const makeDiv = document.createElement('div');
     makeDiv.className = 'userMenu';
     makeDiv.style.position = 'absolute';
@@ -159,6 +159,36 @@ function openUserMenu() {
 	makeDiv.style.height = '350px';
     makeDiv.style.backgroundColor = 'red';
     makeDiv.style.zIndex = '2';
+
+	const makeDiv2 = document.createElement('div');
+	makeDiv2.className = 'userMenuTooltip';
+	
+	const makeSpan2_1_1 = document.createElement('span');
+	makeSpan2_1_1.classList.add('cursor');
+	makeSpan2_1_1.innerText = '로그인';
+	makeSpan2_1_1.setAttribute('onclick',"location.href='/login'");
+//	const makeSpan2_1_2 = document.createElement('span');
+//	makeSpan2_1_2.classList.add('cursor');
+//	makeSpan2_1_2.innerText = '회원가입';
+//	makeSpan2_1_2.setAttribute('onclick',"location.href='/join'");
+	
+	const makeSpan2_2_1 = document.createElement('span');
+	makeSpan2_2_1.classList.add('cursor');
+	makeSpan2_2_1.innerText = '로그아웃';
+	makeSpan2_2_1.setAttribute('onclick',"location.href='/logout'");
+	const makeSpan2_2_2 = document.createElement('span');
+	makeSpan2_2_2.classList.add('cursor');
+	makeSpan2_2_2.innerText = '메인화면';
+	makeSpan2_2_2.setAttribute('onclick',"location.href='/'");
+	
+	if(isLogin) {
+		makeDiv2.append(makeSpan2_2_1);
+		makeDiv2.append(makeSpan2_2_2);
+	} else {
+		makeDiv2.append(makeSpan2_1_1);
+//		makeDiv2.append(makeSpan2_1_2);
+	}
+	makeDiv.append(makeDiv2);
 	centralMenu1_2.append(makeDiv);
 }
 
