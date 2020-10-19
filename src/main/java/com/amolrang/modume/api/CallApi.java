@@ -31,7 +31,7 @@ public class CallApi {
 		if (!StringUtils.isEmpty(userInfoEndpointUri)) {
 			
 			RestTemplate restTemplate = new RestTemplate();
-			HttpHeaders headers = new HttpHeaders();
+			HttpHeaders headers = new HttpHeaders();          
 			headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken().getTokenValue());
 
 			// 유저정보 조회
