@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity // Spring Security 설정을 이 클래스에서 하겠다는 뜻
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
+		http.csrf().disable(); // 활성화되어 있으면 위변조 사이트인지 판별해줌, 나중에 활성화시켜야 함
 		//로그아웃추가
 		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/");
 		

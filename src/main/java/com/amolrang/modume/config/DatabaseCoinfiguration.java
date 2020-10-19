@@ -34,6 +34,7 @@ public class DatabaseCoinfiguration {
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
+		// classpath는 자바 클래스의 resources에 접근하는 변수 ~~?~??~~?~??~!~!~~! 찾아보기1@~!~!!~!@~!@@!#!@#!@
 		sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/**/*.xml"));
 		return sqlSessionFactoryBean.getObject();
 	}
