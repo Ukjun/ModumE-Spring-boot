@@ -44,7 +44,7 @@ public class AuthenticationController {
 		log.info("로그인 성공 페이지 GET접근 :{}", authentication);
 		model.addAttribute(StringUtils.TitleKey(), "로그인 성공 페이지");
 
-		Map UserInfoJson = callApi.CallUserInfoToJson(authentication, authorizedClientService);
+		Map<?, ?> UserInfoJson = callApi.CallUserInfoToJson(authentication, authorizedClientService);
 
 		model.addAttribute("userInfo", UserInfoJson);
 		ra.addFlashAttribute("userInfo", UserInfoJson);

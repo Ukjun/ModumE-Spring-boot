@@ -1,6 +1,6 @@
 package com.amolrang.modume.api;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +14,17 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.amolrang.modume.model.UserModel;
 import com.amolrang.modume.service.UserService;
 import com.amolrang.modume.utils.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
 
 @Slf4j
 @Service
 public class CallApi {
 	@Autowired
 	private UserService userService;
-	public Map CallUserInfoToJson(OAuth2AuthenticationToken authentication,OAuth2AuthorizedClientService auth2AuthorizedClientService) {
+	public Map<Object, Object> CallUserInfoToJson(OAuth2AuthenticationToken authentication,OAuth2AuthorizedClientService auth2AuthorizedClientService) {
 		OAuth2AuthorizedClient client = auth2AuthorizedClientService
 				.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
 		log.info("access token:{}", client.getAccessToken().getTokenValue());
@@ -47,38 +45,56 @@ public class CallApi {
 			log.info("response:{}", response);
 			log.info("userInfo{}", response.getBody());
 			
-			Map userInfo = response.getBody();
-			
+			Map<?, ?> userInfo = response.getBody();
+			Map<Object, Object> userInfoMap = new HashMap<>();
+			String id = null;
+			String name = null;
+			String email = null;
 			switch(authentication.getAuthorizedClientRegistrationId()) {
 			case "naver":
-				Map naverUserInfo = (Map)userInfo.get("response");
+				Map<?, ?> naverUserInfo = (Map<?, ?>)userInfo.get("response");
 				log.info("userinfo_id :{}", naverUserInfo.get("id"));
 				log.info("userinfo_nickname :{}", naverUserInfo.get("nickname"));
 				log.info("userinfo_email :{}", naverUserInfo.get("email"));
+				id = (String) naverUserInfo.get("id");
+				name = (String) naverUserInfo.get("nickname");
+				email = (String) naverUserInfo.get("email");
 				//json obj
 				//obj => 추출
 				//return할때 json으로 정리해서 보내기.
-				return null;
+				break;
 			case "kakao":
-				Map kakaoInfo = (Map)userInfo.get("kakao_account");
-				Map kakaoUserInfo = (Map)kakaoInfo.get("profile");
+				Map<?, ?> kakaoInfo = (Map<?, ?>)userInfo.get("kakao_account");
+				Map<?, ?> kakaoUserInfo = (Map<?, ?>)kakaoInfo.get("profile");
 				log.info("userinfo_id :{}", userInfo.get("id"));
 				log.info("userinfo_nickname :{}", kakaoUserInfo.get("nickname"));
 				log.info("userinfo_email :{}", kakaoInfo.get("email"));
-				return null;
+				id = (String) kakaoInfo.get("id");
+				name = (String) kakaoUserInfo.get("nickname");
+				email = (String) kakaoInfo.get("email");
+				break;
 			case "google":
 				log.info("userinfo_id :{}", userInfo.get("sub"));
 				log.info("userinfo_name :{}", userInfo.get("name"));
 				log.info("userinfo_email :{}", userInfo.get("email"));
-				return null;
+				id = (String) userInfo.get("id");
+				name = (String) userInfo.get("nickname");
+				email = (String) userInfo.get("email");
+				break;
 
 			case "twitch":
 				log.info("userinfo_id :{}", userInfo.get("sub"));
 				log.info("userinfo_name :{}", userInfo.get("preferred_username"));
-				return null;
+				id = (String) userInfo.get("id");
+				name = (String) userInfo.get("nickname");
+				break;
 
 			}
-			return response.getBody();
+
+			userInfoMap.put("userinfo_id", id);
+			userInfoMap.put("userinfo_nickname", name);
+			userInfoMap.put("userinfo_email", email);
+			return userInfoMap;
 		}
 		return null;
 	}
