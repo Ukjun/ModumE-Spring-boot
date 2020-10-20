@@ -17,10 +17,6 @@ public class UserModel implements UserDetails {
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
-	private String naverID;
-	private String twitchID;
-	private String googleID;
-	private String kakaoID;
 	private Collection<? extends GrantedAuthority> authorities;
 
 	@Override
