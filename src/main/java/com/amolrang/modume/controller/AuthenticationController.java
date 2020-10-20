@@ -51,15 +51,13 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value = "/login_success", method = RequestMethod.GET)
-	public String login_success(Model model, OAuth2AuthenticationToken authentication, RedirectAttributes ra) {
+	public String login_success(OAuth2AuthenticationToken authentication, RedirectAttributes ra) {
 		log.info("로그인 성공 페이지 GET접근 :{}", authentication);
-		model.addAttribute(StringUtils.TitleKey(), "로그인 성공 페이지");
 		
 		//UserModel 정보 받아오기 (CallApi으로부터)
 		UserModel UserInfoJson = callApi.CallUserInfoToJson(authentication, authorizedClientService);
 		
 		log.info("UserInfoJson:{}",UserInfoJson);
-		model.addAttribute("userInfo", UserInfoJson);
 		ra.addFlashAttribute("userInfo", UserInfoJson);
 		
 		return "redirect:/main";
