@@ -81,16 +81,16 @@ public class CallApi {
 				log.info("userinfo_id :{}", userInfo.get("sub"));
 				log.info("userinfo_name :{}", userInfo.get("name"));
 				log.info("userinfo_email :{}", userInfo.get("email"));
-				id = String.format("%s", userInfo.get("id"));
-				name = (String) userInfo.get("nickname");
+				id = String.format("%s", userInfo.get("sub"));
+				name = (String) userInfo.get("name");
 				email = (String) userInfo.get("email");
 				break;
 
 			case "twitch":
 				log.info("userinfo_id :{}", userInfo.get("sub"));
 				log.info("userinfo_name :{}", userInfo.get("preferred_username"));
-				id = (String) userInfo.get("id");
-				name = (String) userInfo.get("nickname");
+				id = (String) userInfo.get("sub");
+				name = (String) userInfo.get("preferred_username");
 				break;
 
 			}
