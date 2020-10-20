@@ -49,12 +49,18 @@ public class CallApi {
 			log.info("response:{}", response);
 			log.info("userInfo{}", response.getBody());
 
+			//유저 정보 추출
 			Map<?, ?> userInfo = response.getBody();
 			Map<Object, Object> userInfoMap = new HashMap<>();
+			
+			//뽑은 정보들 넣을 변수들
 			String id = null;
 			String name = null;
 			String email = null;
+			
+			//어느 사이트와 연동해서 로그인을 했느냐에 따라 switch문
 			switch (authentication.getAuthorizedClientRegistrationId()) {
+			//각각 필요한 정보 뽑기(id, name, email >> twitch는 email없음)
 			case "naver":
 				Map<?, ?> naverUserInfo = (Map<?, ?>) userInfo.get("response");
 				log.info("userinfo_id :{}", naverUserInfo.get("id"));
@@ -94,6 +100,7 @@ public class CallApi {
 				break;
 
 			}
+			//userModel에 뽑은 값 넣기 
 			userModel.setId(id);
 			userModel.setUsername(name);
 			//userInfoMap.put("userinfo_id", id);
