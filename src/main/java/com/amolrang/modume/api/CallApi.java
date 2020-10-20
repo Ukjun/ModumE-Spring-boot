@@ -73,7 +73,7 @@ public class CallApi {
 				log.info("userinfo_id :{}", userInfo.get("id"));
 				log.info("userinfo_nickname :{}", kakaoUserInfo.get("nickname"));
 				log.info("userinfo_email :{}", kakaoInfo.get("email"));
-				id = (String) kakaoInfo.get("id");
+				id = String.valueOf(userInfo.get("id"));
 				name = (String) kakaoUserInfo.get("nickname");
 				email = (String) kakaoInfo.get("email");
 				break;
