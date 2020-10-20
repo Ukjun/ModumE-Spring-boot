@@ -1,5 +1,6 @@
 package com.amolrang.modume.api;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.amolrang.modume.model.UserModel;
 import com.amolrang.modume.service.UserService;
 import com.amolrang.modume.utils.StringUtils;
 
@@ -24,16 +26,18 @@ import lombok.extern.slf4j.Slf4j;
 public class CallApi {
 	@Autowired
 	private UserService userService;
-	public Map<Object, Object> CallUserInfoToJson(OAuth2AuthenticationToken authentication,OAuth2AuthorizedClientService auth2AuthorizedClientService) {
+	public UserModel CallUserInfoToJson(OAuth2AuthenticationToken authentication,
+			OAuth2AuthorizedClientService auth2AuthorizedClientService) {
+		UserModel userModel = null;
 		OAuth2AuthorizedClient client = auth2AuthorizedClientService
 				.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
 		log.info("access token:{}", client.getAccessToken().getTokenValue());
 		String userInfoEndpointUri = client.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri();
-		
-		if (!StringUtils.isEmpty(userInfoEndpointUri)) {
-			
+
+		if (!StringUtils.isEmpty(userInfoEndpointUri)){
+			userModel = new UserModel();
 			RestTemplate restTemplate = new RestTemplate();
-			HttpHeaders headers = new HttpHeaders();          
+			HttpHeaders headers = new HttpHeaders();
 			headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken().getTokenValue());
 
 			// 유저정보 조회
@@ -44,28 +48,28 @@ public class CallApi {
 
 			log.info("response:{}", response);
 			log.info("userInfo{}", response.getBody());
-			
+
 			Map<?, ?> userInfo = response.getBody();
 			Map<Object, Object> userInfoMap = new HashMap<>();
 			String id = null;
 			String name = null;
 			String email = null;
-			switch(authentication.getAuthorizedClientRegistrationId()) {
+			switch (authentication.getAuthorizedClientRegistrationId()) {
 			case "naver":
-				Map<?, ?> naverUserInfo = (Map<?, ?>)userInfo.get("response");
+				Map<?, ?> naverUserInfo = (Map<?, ?>) userInfo.get("response");
 				log.info("userinfo_id :{}", naverUserInfo.get("id"));
 				log.info("userinfo_nickname :{}", naverUserInfo.get("nickname"));
 				log.info("userinfo_email :{}", naverUserInfo.get("email"));
 				id = (String) naverUserInfo.get("id");
 				name = (String) naverUserInfo.get("nickname");
 				email = (String) naverUserInfo.get("email");
-				//json obj
-				//obj => 추출
-				//return할때 json으로 정리해서 보내기.
+				// json obj
+				// obj => 추출
+				// return할때 json으로 정리해서 보내기.
 				break;
 			case "kakao":
-				Map<?, ?> kakaoInfo = (Map<?, ?>)userInfo.get("kakao_account");
-				Map<?, ?> kakaoUserInfo = (Map<?, ?>)kakaoInfo.get("profile");
+				Map<?, ?> kakaoInfo = (Map<?, ?>) userInfo.get("kakao_account");
+				Map<?, ?> kakaoUserInfo = (Map<?, ?>) kakaoInfo.get("profile");
 				log.info("userinfo_id :{}", userInfo.get("id"));
 				log.info("userinfo_nickname :{}", kakaoUserInfo.get("nickname"));
 				log.info("userinfo_email :{}", kakaoInfo.get("email"));
@@ -77,7 +81,7 @@ public class CallApi {
 				log.info("userinfo_id :{}", userInfo.get("sub"));
 				log.info("userinfo_name :{}", userInfo.get("name"));
 				log.info("userinfo_email :{}", userInfo.get("email"));
-				id = (String) userInfo.get("id");
+				id = String.format("%s", userInfo.get("id"));
 				name = (String) userInfo.get("nickname");
 				email = (String) userInfo.get("email");
 				break;
@@ -90,12 +94,13 @@ public class CallApi {
 				break;
 
 			}
-
-			userInfoMap.put("userinfo_id", id);
-			userInfoMap.put("userinfo_nickname", name);
-			userInfoMap.put("userinfo_email", email);
-			return userInfoMap;
+			userModel.setId(id);
+			userModel.setUsername(name);
+			//userInfoMap.put("userinfo_id", id);
+			//userInfoMap.put("userinfo_nickname", name);
+			//userInfoMap.put("userinfo_email", email);
+			log.info("userModel:{}",userModel);
 		}
-		return null;
+		return userModel;
 	}
 }

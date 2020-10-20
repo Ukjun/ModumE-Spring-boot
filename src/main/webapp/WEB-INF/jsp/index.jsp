@@ -86,7 +86,7 @@
     <script>
 
     function connect(event){
-    	username = '';
+    	username = '${userInfo.username}';
     	console.log(username)
     	if(username){
     		console.log("connect Start")
